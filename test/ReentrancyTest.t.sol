@@ -1,4 +1,3 @@
-// test/ReentrancyTest.t.sol
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.26;
 
@@ -6,6 +5,11 @@ import "forge-std/Test.sol";
 import "../src/reentrancy/EtherStore.sol";
 import "../src/reentrancy/Attack.sol";
 
+/**
+ * @title ReentrancyTest
+ * @author Ishan Lakhwani
+ * @notice Foundry test illustrating reentrancy vulnerability in EtherStore.
+ */
 contract ReentrancyTest is Test {
     EtherStore public etherStore;
     Attack public attack;
