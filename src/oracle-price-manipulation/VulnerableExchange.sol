@@ -42,7 +42,9 @@ contract VulnerableExchange {
 
         // Calculate token amount based on current oracle price
         uint256 price = getPrice();
-        uint256 tokenAmount = (_usdAmount * 1e8) / price; // This will give us the correct token amount
+        // _usdAmount has 18 decimals, price has 8 decimals
+        // We want tokenAmount to have 18 decimals
+        uint256 tokenAmount = (_usdAmount * 1e18) / (price * 1e10);
 
         require(tokenAmount <= reservesTOKEN, "Not enough tokens in reserve");
 
@@ -58,7 +60,9 @@ contract VulnerableExchange {
 
         // Calculate USD amount based on current oracle price
         uint256 price = getPrice();
-        uint256 usdAmount = (_tokenAmount * price) / 1e8; // This will give us the correct USD amount
+        // _tokenAmount has 18 decimals, price has 8 decimals
+        // We want usdAmount to have 18 decimals
+        uint256 usdAmount = (_tokenAmount * price * 1e10) / 1e18;
 
         require(usdAmount <= reservesUSD, "Not enough USD in reserve");
 
